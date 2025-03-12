@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 
 using namespace std;
 
@@ -9,7 +10,12 @@ private:
     int length = 10;
     int width = 10;
     int totalSize = 100;
+    vector<int> playersPosition;
+    unordered_map<int, int> Snakes;
+    unordered_map<int, int> Ladderes;
+
 public:
+    int BoardSize = 100;
     board(int width, int length, int totalSize);
     ~board();
 };

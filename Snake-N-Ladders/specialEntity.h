@@ -1,33 +1,31 @@
 #include <iostream>
 #include <vector>
 #include <random>
+#include "board.h"
 
 using namespace std;
 
 class specialEntity{
+    int start, end;
 private:
-    int numberOfSnake, numberOfLadders;
+
 public:
-    specialEntity(/* args */);
+    specialEntity();
+    int generateEntity(){
+        random_device rd;
+        mt19937 gen(rd());
+    
+        uniform_int_distribution<int> dist(2, 99);
+        return dist(gen());
+    }
     ~specialEntity();
 };
 
-specialEntity::specialEntity(/* args */){
-    random_device rd;
-    mt19937 gen(rd);
-}
-
-specialEntity::~specialEntity()
-{
+specialEntity::specialEntity(){
 }
 
 
-class snake{
-private:
-    int start, end;
-};
 
-class labber{
-public:
-    int start, end;
-};
+specialEntity::~specialEntity(){
+
+}
