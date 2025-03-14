@@ -14,9 +14,8 @@ public:
     int generateEntity(){
         random_device rd;
         mt19937 gen(rd());
-    
         uniform_int_distribution<int> dist(2, 99);
-        return dist(gen());
+        return dist(gen);
     }
     ~specialEntity();
 };
