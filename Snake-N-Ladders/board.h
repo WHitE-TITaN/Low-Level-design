@@ -1,7 +1,7 @@
-#include <iostream>
-#include <vector>
 #include <unordered_map>
+#include <string>
 #include "specialEntity.h"
+#include "player.h"
 
 using namespace std;
 
@@ -13,6 +13,7 @@ private:
     int totalSize;
     unordered_map<int, int> Snakes;
     unordered_map<int, int> Ladderes;
+    vector<player> Player;
 
 public:
     int BoardSize = 100;
@@ -22,6 +23,8 @@ public:
 
     void generateLadders();
     void generateSnake();
+    
+    void movePlayer(player Player);
 };
 
 
@@ -100,6 +103,29 @@ bool board::validityCheck(){
     return true;
 } 
 
+
+
+//player Movement 🏃‍♂️💨
+void board::movePlayer(player Player){
+    specialEntity myDice;
+
+    cout<<"Enter your luckey string -> ";
+    string luckeyString;
+    getline(cin, luckeyString);
+    
+    int myRoll = myDice.rollDice(luckeyString),
+    move = Player.getPosition();
+
+    if(Ladderes.find(move + myRoll) != Ladderes.end()){
+        move += Ladderes[move + myRoll];
+    }
+
+    if(Snakes.find(move + myRoll) != Snakes.end()){
+        move -= Snakes[move + myRoll];
+    }
+
+    Player.setPosition(move + myRoll);
+}
 board::~board(){
 }
 

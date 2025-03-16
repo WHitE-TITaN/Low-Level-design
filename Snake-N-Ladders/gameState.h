@@ -8,12 +8,11 @@ private:
     end = false, 
     running = false;
 public:
-    gameState(/* args */);
+    gameState(string state, bool startus);
     ~gameState();
 };
 
-gameState::gameState()
-{
+gameState::gameState(string state, bool status){
 }
 
 gameState::~gameState()
