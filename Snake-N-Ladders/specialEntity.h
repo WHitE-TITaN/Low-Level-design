@@ -1,23 +1,32 @@
 #include <iostream>
 #include <vector>
+#include <utility>
 #include <random>
-#include "board.h"
 
 using namespace std;
 
 class specialEntity{
-    int start, end;
 private:
+    mt19937 gen;
 
 public:
     specialEntity();
-    int generateEntity(){
-        random_device rd;
-        mt19937 gen(rd());
-        uniform_int_distribution<int> dist(2, 99);
-        return dist(gen);
-    }
     ~specialEntity();
+
+    pair<int, int> generateEntity(){
+        pair<int, int> outPut;
+        
+        //Generating head of snake -> 
+        uniform_int_distribution<int> snakeHead(11, 99);
+        outPut.first = snakeHead(gen);
+        
+        //Generating Tail of snake -> 
+        uniform_int_distribution<int> snakeTail(1, outPut.first);
+        outPut.second = snakeTail(gen);
+
+        //return head and tail
+        return outPut;
+    }
 };
 
 specialEntity::specialEntity(){
