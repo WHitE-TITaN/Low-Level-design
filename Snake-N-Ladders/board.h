@@ -35,11 +35,15 @@ board::board(int width, int length, int totalSize){
         cout<<"Error ! incorrect Width and Length ! Not Symmetrical";
         return ;
     }
-    cout<<"Generating Board -> ";
+    cout<<"Generating Snakes -> ";
 
     generateSnake();
-    
-    cout<<"Boad is generated With Snakes -> ";
+    cout<<"Boad is generated With Snakes -> \n\n";
+
+    cout<<"Generating Ladders -> ";
+    generateLadders();
+
+    cout<<"Board is generated successfully checkMark <True>";
 }
 
 
@@ -79,10 +83,10 @@ void board::generateLadders(){
         }
 
         Ladderes[ladders.second] = ladders.first;
+    }
 
-        for(auto entiry : Ladderes){
-            cout<<"Head -> "<<entiry.second<<", tail -> "<<entiry.first<<"\n";
-        }
+    for(auto entiry : Ladderes){
+        cout<<"Head -> "<<entiry.second<<", tail -> "<<entiry.first<<"\n";
     }
 }
 
