@@ -5,9 +5,11 @@
 
 using namespace std;
 
+random_device rd;
+mt19937 gen(rd());
+
 class specialEntity{
 private:
-    mt19937 gen;
 
 public:
     specialEntity();
@@ -21,7 +23,7 @@ public:
         outPut.first = snakeHead(gen);
         
         //Generating Tail of snake -> 
-        uniform_int_distribution<int> snakeTail(1, outPut.first);
+        uniform_int_distribution<int> snakeTail(1, outPut.first - 1);
         outPut.second = snakeTail(gen);
 
         //return head and tail

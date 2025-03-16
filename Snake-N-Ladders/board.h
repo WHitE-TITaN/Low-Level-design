@@ -81,12 +81,11 @@ void board::generateLadders(){
         while(Ladderes.find(ladders.second) != Ladderes.end()){
             ladders = ladder.generateEntity();
         }
-
         Ladderes[ladders.second] = ladders.first;
     }
 
     for(auto entiry : Ladderes){
-        cout<<"Head -> "<<entiry.second<<", tail -> "<<entiry.first<<"\n";
+        cout<<"Head -> "<<entiry.first<<", tail -> "<<entiry.second<<"\n";
     }
 }
 
