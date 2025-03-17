@@ -17,7 +17,6 @@ A simple console-based **Snake & Ladders** game built in C++ with object-oriente
 │   ├── player.h          # Player class (name, position, movement)
 │   ├── gameState.h       # Game state management
 │   ├── specialEntity.h   # Dice rolling & entity generation (snakes/ladders)
-│   ├── CMakeLists.txt    # Build configuration
 ├── README.md             # Documentation
 ```
 
