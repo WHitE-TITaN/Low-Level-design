@@ -12,6 +12,7 @@ private:
     int length;
     int width;
     int totalSize;
+    bool boardStatus = false;
     unordered_map<int, int> Snakes;
     unordered_map<int, int> Ladderes;
 
@@ -48,6 +49,7 @@ board::board(int width, int length, int totalSize){
 
     cout<<"Board is generated successfully checkMark <True>"; 
 
+    this->boardStatus = true;
     player player1;
     movePlayer(player1);
 }
@@ -99,7 +101,7 @@ void board::generateLadders(){
 
 //check validity ✅
 bool board::validityCheck(){
-    if(Snakes.size() != 6 && Ladderes.size() != 5){
+    if(Snakes.size() != 6 && Ladderes.size() != 5 && this->boardStatus == true){
         cout<<"Invalid BoadGeneration !";
         return false;
     }
@@ -122,15 +124,20 @@ void board::movePlayer(player Player){
     cout<<"\n\tinitial position ->> "<<move;
     cout<<"\n\tyour Roll ->> "<<myRoll;
 
-    if(Ladderes.find(move + myRoll) != Ladderes.end()){
-        move += Ladderes[move + myRoll];
+    if(move == 0 && myRoll != 6){
+        myRoll = 0;
+    } 
+
+    move += myRoll;
+    if(Ladderes.find(move) != Ladderes.end()){
+        move += Ladderes[move];
     }
 
-    if(Snakes.find(move + myRoll) != Snakes.end()){
-        move -= Snakes[move + myRoll];
+    if(Snakes.find(move) != Snakes.end()){
+        move -= Snakes[move];
     }
-    cout<<"\n\tplayer Position ->> "<<move + myRoll;
-    Player.setPosition(move + myRoll);
+    cout<<"\n\tplayer Position ->> "<<move;
+    Player.setPosition(move);
 }
 board::~board(){
 }

@@ -8,13 +8,13 @@ private:
     end = false, 
     running = false;
 public:
-    void startGame(int PlayerCount), setEnded();
+    void startGame(), setEnded();
     bool isEnded(), isStarted();
-    gameState(string state, bool startus);
+    gameState();
     ~gameState();
 };
 
-void gameState::startGame(int playerCount){
+void gameState::startGame(){
     this->start = true;
 }
 
@@ -30,7 +30,7 @@ void gameState::setEnded(){
     this->end = true;
 }
 
-gameState::gameState(string state, bool status){
+gameState::gameState(){
 }
 
 gameState::~gameState()
