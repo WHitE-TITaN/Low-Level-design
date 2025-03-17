@@ -62,3 +62,15 @@ This project is open-source. Feel free to modify and distribute!
 ---
 💡 **Contributions & Feedback** are welcome! 🎉
 
+# Screen Short Start Game 🏃‍♂️💨
+---
+![Screenshot 2025-03-18 001755](https://github.com/user-attachments/assets/0d0963e2-5309-4366-a8b9-839438dab134)
+
+---
+# Screen Short End Game 🐲🪜👑
+---
+![Screenshot 2025-03-18 002550](https://github.com/user-attachments/assets/94543f8d-a4dc-4c3a-9257-efcc9c91cc8a)
+
+---
+# THANKYOU❤️
+
