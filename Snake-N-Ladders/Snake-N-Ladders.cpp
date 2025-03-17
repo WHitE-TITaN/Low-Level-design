@@ -32,6 +32,7 @@ int main(){
 
         gameState newGame;
         newGame.startGame();
+        
         while(newGame.isEnded()){
             for(auto players : allPlayers){
 
