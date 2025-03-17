@@ -29,14 +29,14 @@ int main(){
         newGame.startGame();
 
         while(!newGame.isEnded()){
-            for(auto players : allPlayers){
+            for(auto& players : allPlayers){
 
                 //move player -> 🏃‍♂️💨
                 GameBoard.movePlayer(players.second);
 
                 //if the player has reached 100 then end game ->
 
-                if(players.second.getPosition() > 100){
+                if(players.second.getPosition() == 100){
                     newGame.setEnded();
                     break;
                 }
