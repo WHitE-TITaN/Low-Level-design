@@ -13,6 +13,7 @@ public:
     ~player();
 
     int getPosition();
+    string getName();
     void setPosition(int move);
     void setName(string name);
 };
@@ -20,6 +21,10 @@ public:
 
 int player::getPosition(){
     return this->position;
+}
+
+string player::getName(){
+    return this->name;
 }
 
 void player::setPosition(int move){

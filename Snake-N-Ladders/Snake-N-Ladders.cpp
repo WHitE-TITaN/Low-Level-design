@@ -16,24 +16,19 @@ int main(){
         vector<pair<string, player>> allPlayers(playerCount);
 
         for(int i = 0; i < playerCount; i++){
-            pair<string, player> thePlayer;
-
             string name;
             cout<<"Enter player"<<i + 1<<"name -> ";
             getline(cin, name);
             player newPlayer;
             newPlayer.setName(name);
 
-            thePlayer.first = name;
-            thePlayer.second = newPlayer;
-
-            allPlayers.push_back(thePlayer);
+            allPlayers[i] = {name, newPlayer};
         }
 
         gameState newGame;
         newGame.startGame();
-        
-        while(newGame.isEnded()){
+
+        while(!newGame.isEnded()){
             for(auto players : allPlayers){
 
                 //move player -> 🏃‍♂️💨
@@ -41,7 +36,7 @@ int main(){
 
                 //if the player has reached 100 then end game ->
 
-                if(players.second.getPosition() >= 100){
+                if(players.second.getPosition() > 100){
                     newGame.setEnded();
                     break;
                 }
@@ -50,3 +45,6 @@ int main(){
 
     }
 }
+
+
+//dedeawefaw seed for 6;

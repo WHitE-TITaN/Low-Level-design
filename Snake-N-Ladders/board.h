@@ -25,7 +25,7 @@ public:
     void generateLadders();
     void generateSnake();
     
-    void movePlayer(player Player);
+    void movePlayer(player &Player);
 };
 
 
@@ -50,8 +50,6 @@ board::board(int width, int length, int totalSize){
     cout<<"Board is generated successfully checkMark <True>"; 
 
     this->boardStatus = true;
-    player player1;
-    movePlayer(player1);
 }
 
 
@@ -101,7 +99,7 @@ void board::generateLadders(){
 
 //check validity ✅
 bool board::validityCheck(){
-    if(Snakes.size() != 6 && Ladderes.size() != 5 && this->boardStatus == true){
+    if(Snakes.size() != 6 || Ladderes.size() != 5 || this->boardStatus != true){
         cout<<"Invalid BoadGeneration !";
         return false;
     }
@@ -111,10 +109,14 @@ bool board::validityCheck(){
 
 
 //player Movement 🏃‍♂️💨
-void board::movePlayer(player Player){
+void board::movePlayer(player &Player){
     specialEntity myDice;
+    string name = Player.getName();
 
-    cout<<"Enter your luckey string -> ";
+    cout<<"\n\n\t";
+    for(auto character : name)cout<<character;
+
+    cout<<"    Enter your luckey string -> ";
     string luckeyString;
     getline(cin, luckeyString);
     
@@ -126,21 +128,25 @@ void board::movePlayer(player Player){
 
     if(move == 0 && myRoll != 6){
         myRoll = 0;
+        cout<<"\n\t Need 6 to start !";
     } 
 
     if(move + myRoll > 100){
         myRoll = 0;
+        cout<<"\n\tneed "<<100 - move<<" or less to move !";
     }
-    
+
     move += myRoll;
     if(Ladderes.find(move) != Ladderes.end()){
-        move += Ladderes[move];
+        move = Ladderes[move];
     }
 
     if(Snakes.find(move) != Snakes.end()){
-        move -= Snakes[move];
+        move = Snakes[move];
     }
-    cout<<"\n\tplayer Position ->> "<<move;
+    cout<<"\n\n\t";
+    for(auto character : name)cout<<character;
+    cout<<"  Position ->> "<<move;
     Player.setPosition(move);
 }
 board::~board(){
