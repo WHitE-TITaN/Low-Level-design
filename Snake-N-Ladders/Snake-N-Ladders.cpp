@@ -37,6 +37,10 @@ int main(){
                 //if the player has reached 100 then end game ->
 
                 if(players.second.getPosition() == 100){
+                    cout<<"\n\n\t\t\t";
+                    string Name = players.second.getName();
+                    for(auto Character : Name) cout<<Character;
+                    cout<<"\n\t*********          WON THE GAME              **********\n\n\n\n\n\n\n";
                     newGame.setEnded();
                     break;
                 }
