@@ -128,6 +128,10 @@ void board::movePlayer(player Player){
         myRoll = 0;
     } 
 
+    if(move + myRoll > 100){
+        myRoll = 0;
+    }
+    
     move += myRoll;
     if(Ladderes.find(move) != Ladderes.end()){
         move += Ladderes[move];

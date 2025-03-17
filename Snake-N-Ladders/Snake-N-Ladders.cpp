@@ -5,9 +5,9 @@
 using namespace std;
 
 int main(){
-    board Test(10, 10, 100);
+    board GameBoard(10, 10, 100);
 
-    if(Test.validityCheck()){
+    if(GameBoard.validityCheck()){
         int playerCount;
         cout<<"\n\tEnter number of players ->> ";
         cin>>playerCount;
@@ -31,6 +31,21 @@ int main(){
         }
 
         gameState newGame;
-        
+        newGame.startGame();
+        while(newGame.isEnded()){
+            for(auto players : allPlayers){
+
+                //move player -> 🏃‍♂️💨
+                GameBoard.movePlayer(players.second);
+
+                //if the player has reached 100 then end game ->
+
+                if(players.second.getPosition() >= 100){
+                    newGame.setEnded();
+                    break;
+                }
+            }
+        }
+
     }
 }
