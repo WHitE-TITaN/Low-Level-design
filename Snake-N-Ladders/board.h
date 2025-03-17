@@ -2,6 +2,7 @@
 #include <string>
 #include "specialEntity.h"
 #include "player.h"
+#include "gameState.h"
 
 using namespace std;
 
@@ -13,7 +14,6 @@ private:
     int totalSize;
     unordered_map<int, int> Snakes;
     unordered_map<int, int> Ladderes;
-    vector<player> Player;
 
 public:
     int BoardSize = 100;
@@ -46,7 +46,10 @@ board::board(int width, int length, int totalSize){
     cout<<"Generating Ladders -> ";
     generateLadders();
 
-    cout<<"Board is generated successfully checkMark <True>";
+    cout<<"Board is generated successfully checkMark <True>"; 
+
+    player player1;
+    movePlayer(player1);
 }
 
 
@@ -116,6 +119,9 @@ void board::movePlayer(player Player){
     int myRoll = myDice.rollDice(luckeyString),
     move = Player.getPosition();
 
+    cout<<"\n\tinitial position ->> "<<move;
+    cout<<"\n\tyour Roll ->> "<<myRoll;
+
     if(Ladderes.find(move + myRoll) != Ladderes.end()){
         move += Ladderes[move + myRoll];
     }
@@ -123,7 +129,7 @@ void board::movePlayer(player Player){
     if(Snakes.find(move + myRoll) != Snakes.end()){
         move -= Snakes[move + myRoll];
     }
-
+    cout<<"\n\tplayer Position ->> "<<move + myRoll;
     Player.setPosition(move + myRoll);
 }
 board::~board(){
