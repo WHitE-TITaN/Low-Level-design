@@ -22,8 +22,8 @@ public:
     ~board();
     bool validityCheck();
 
-    void generateLadders();
-    void generateSnake();
+    void generateLadders(int number);
+    void generateSnake(int number);
     
     void movePlayer(player &Player);
 };
@@ -35,17 +35,25 @@ board::board(int width, int length, int totalSize){
     this->width = width;
     this->totalSize = totalSize;
 
+    int snakes, ladders;
+    cout<<"\nEnter numebr of snakes -> ";
+    cin>>snakes;
+    cout<<"\nEnter number of ladders -> ";
+    cin>>ladders;
+
+    cin.ignore();
+
     if(totalSize != (width * length)){
         cout<<"Error ! incorrect Width and Length ! Not Symmetrical";
         return ;
     }
     cout<<"Generating Snakes -> ";
 
-    generateSnake();
+    generateSnake(snakes);
     cout<<"Boad is generated With Snakes -> \n\n";
 
     cout<<"Generating Ladders -> ";
-    generateLadders();
+    generateLadders(ladders);
 
     cout<<"Board is generated successfully checkMark <True>"; 
 
@@ -56,9 +64,9 @@ board::board(int width, int length, int totalSize){
 
 
 //Generating Snakes 🐉🐲
-void board::generateSnake(){
+void board::generateSnake(int number){
     specialEntity snake;
-    for(int i = 0; i < 6; i++){
+    for(int i = 0; i < number; i++){
         pair<int, int> generatedSnake = snake.generateEntity();
 
         while(Snakes.find(generatedSnake.first) != Snakes.end()){
@@ -78,10 +86,10 @@ void board::generateSnake(){
 
 
 //Generating ladders 🪜🪜
-void board::generateLadders(){
+void board::generateLadders(int number){
     specialEntity ladder;
 
-    for(int i = 0; i < 5; i++){
+    for(int i = 0; i < number; i++){
         pair<int, int> ladders = ladder.generateEntity();
 
         while(Ladderes.find(ladders.second) != Ladderes.end()){
