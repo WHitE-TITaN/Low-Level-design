@@ -20,7 +20,7 @@ public:
     int BoardSize = 100;
     board(int width, int length, int totalSize);
     ~board();
-    bool validityCheck();
+    bool validityCheck(int snakeNumber, int LadderNumber);
 
     void generateLadders(int number);
     void generateSnake(int number);
@@ -106,8 +106,8 @@ void board::generateLadders(int number){
 
 
 //check validity ✅
-bool board::validityCheck(){
-    if(Snakes.size() != 6 || Ladderes.size() != 5 || this->boardStatus != true){
+bool board::validityCheck(int snakeNumber, int Ladder){
+    if(Snakes.size() != snakeNumber || Ladderes.size() != Ladder || this->boardStatus != true){
         cout<<"Invalid BoadGeneration !";
         return false;
     }
