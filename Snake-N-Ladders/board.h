@@ -18,7 +18,7 @@ private:
 
 public:
     int BoardSize = 100;
-    board(int width, int length, int totalSize);
+    board(int width, int length, int totalSize,  int snake, int ladder);
     ~board();
     bool validityCheck(int snakeNumber, int LadderNumber);
 
@@ -30,16 +30,11 @@ public:
 
 
 //constructing Board 🔁🔁
-board::board(int width, int length, int totalSize){
+board::board(int width, int length, int totalSize, int snakes, int ladders){
     this->length = length;
     this->width = width;
     this->totalSize = totalSize;
 
-    int snakes, ladders;
-    cout<<"\nEnter numebr of snakes -> ";
-    cin>>snakes;
-    cout<<"\nEnter number of ladders -> ";
-    cin>>ladders;
 
     cin.ignore();
 
@@ -96,7 +91,7 @@ void board::generateLadders(int number){
             ladders = ladder.generateEntity();
         }
         Ladderes[ladders.second] = ladders.first;
-    }
+    } 
 
     for(auto entiry : Ladderes){
         cout<<"Head -> "<<entiry.first<<", tail -> "<<entiry.second<<"\n";

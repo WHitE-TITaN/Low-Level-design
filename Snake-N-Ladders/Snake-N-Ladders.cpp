@@ -5,9 +5,15 @@
 using namespace std;
 
 int main(){
-    board GameBoard(10, 10, 100);
+    int snakes, ladders;
+    cout<<"\nEnter numebr of snakes -> ";
+    cin>>snakes;
+    cout<<"\nEnter number of ladders -> ";
+    cin>>ladders;
 
-    if(GameBoard.validityCheck()){
+    board GameBoard(10, 10, 100, snakes, ladders);
+
+    if(GameBoard.validityCheck(snakes, ladders)){
         int playerCount;
         cout<<"\n\tEnter number of players ->> ";
         cin>>playerCount;

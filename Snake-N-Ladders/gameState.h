@@ -26,4 +26,5 @@ bool gameState::isEnded(){
 
 void gameState::setEnded(){
     this->end = true;
+    
 }
