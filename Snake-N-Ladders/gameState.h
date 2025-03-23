@@ -10,8 +10,6 @@ private:
 public:
     void startGame(), setEnded();
     bool isEnded(), isStarted();
-    gameState();
-    ~gameState();
 };
 
 void gameState::startGame(){
@@ -28,11 +26,4 @@ bool gameState::isEnded(){
 
 void gameState::setEnded(){
     this->end = true;
-}
-
-gameState::gameState(){
-}
-
-gameState::~gameState()
-{
 }

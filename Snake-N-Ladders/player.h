@@ -9,8 +9,6 @@ private:
     int position = 0;
     string name;
 public:
-    player();
-    ~player();
 
     int getPosition();
     string getName();
@@ -28,16 +26,13 @@ string player::getName(){
 }
 
 void player::setPosition(int move){
+    if((this->position + move) == 100){
+        gameState playerWon;
+        playerWon.setEnded();
+    }
     this->position = move;
 }
 
 void player::setName(string name){
     this->name = name;
-}
-
-player::player(){
-}
-
-player::~player()
-{
 }
