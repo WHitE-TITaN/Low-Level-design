@@ -23,7 +23,7 @@ A simple console-based **Snake & Ladders** game built in C++ with object-oriente
 ## 🎮 How to Play
 1. **Compile & Run**:
     ```sh
-    g++ -o SnakeGame main.cpp
+    g++ -o SnakeGame Snake-N-Ladders.cpp
     ./SnakeGame
     ```
 2. **Enter number of players.**
