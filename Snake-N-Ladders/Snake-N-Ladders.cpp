@@ -36,7 +36,8 @@ int main(){
 
         while(!newGame.isEnded()){
             for(auto& players : allPlayers){
-
+                if(newGame.isEnded()) return 0;
+                
                 //move player -> 🏃‍♂️💨
                 GameBoard.movePlayer(players.second);
 
