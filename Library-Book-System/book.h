@@ -4,6 +4,8 @@
 #include <unordered_map>
 #include <utility>
 #include <vector>
+#include <ctime>
+#include "members.h"
 #include <string>
 
 using namespace std;
@@ -11,18 +13,29 @@ using namespace std;
 class book
 {
 private:
+    string bookName;
     int total_count, current_count;
-    unordered_map<string, pair<string, string>> issures;
-    
+    unordered_map<string, pair<tm, tm>> issures;
+
+    time_t systemDate;      //featch the system time
+    tm date;               //formatize to featch date, mounth, year, min, hrs, sec 24 hr clock;
 
 public:
     book();
     ~book();
+
+    bool issuedTo(string name);
 };
 
-book::book(/* args */)
-{
+book::book(){
+    systemDate = time(0);
+    date = *localtime(&systemDate);
 }
+
+bool book::issuedTo(string name){
+    members *currentQueuing;
+
+} 
 
 book::~book()
 {
