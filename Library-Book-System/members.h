@@ -15,7 +15,7 @@ public:
     ~members();
 
     bool registerUser();
-    bool isValidMember(string name);
+    bool isValidMember(int id);
 };
 
 
@@ -32,7 +32,7 @@ members::members()
 bool members::registerUser(){
     string name;
     string rawInput;
-    cin.ignore();
+    //cin.ignore();
 
     cout<<"\n\tName /- ";
     getline(cin, name);
@@ -45,11 +45,32 @@ bool members::registerUser(){
     }
     
     validTill.tm_year = 1900 + validTill.tm_year;
-    validTill.tm_mon = validTill.tm_mon + 2;        // 1 to index it to 1 - january + 1 subscription
+    validTill.tm_mon = (validTill.tm_mon + 2) % 12;        // 1 to index it to 1 - january + 1 subscription
 
     int hashValue = hash<string>{}(rawInput) % 1000000;
+    cout<<hashValue;
     allMembers[hashValue].first = name;
     allMembers[hashValue].second = validTill;
+
+    isValidMember(hashValue);
+}
+
+
+
+bool members::isValidMember(int id){
+    auto locator = allMembers.find(id);
+
+    if(locator == allMembers.end()){
+        cout<<"user Not Fount !\n";
+        return false;
+    }
+    pair<string, tm> nameNValidity = locator->second;
+    cout<<nameNValidity.first<<"\n";
+    cout<<nameNValidity.second.tm_mday <<" / "
+        <<nameNValidity.second.tm_mon <<" / " 
+        <<nameNValidity.second.tm_year <<"\n";
+
+    return true;
 }
 
 members::~members()

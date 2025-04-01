@@ -33,7 +33,6 @@ book::book(){
 }
 
 bool book::issuedTo(string name){
-    members *currentQueuing;
 
 } 
 
