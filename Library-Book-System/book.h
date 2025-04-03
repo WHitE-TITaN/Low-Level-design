@@ -25,11 +25,18 @@ public:
     ~book();
 
     bool issuedTo(string name);
+    bool addNewBook(string name, int total_count);
 };
 
 book::book(){
     systemDate = time(0);
     date = *localtime(&systemDate);
+}
+
+bool book::addNewBook(string name, int count){
+    this->bookName = name;
+    this->total_count = count;
+    this->current_count = count;
 }
 
 bool book::issuedTo(string name){
