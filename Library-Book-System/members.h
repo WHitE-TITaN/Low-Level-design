@@ -22,17 +22,19 @@ public:
 //constructor ->>
 members::members()
 {
-    systemDay = time(0);
-    validTill = *localtime(&systemDay);
-    date = ctime(&systemDay);
 }
 
 
-// add new user function ->>
+//🆕 add new user function ->>
 bool members::registerUser(){
     string name;
     string rawInput;
     //cin.ignore();
+
+    // get todays date;
+    systemDay = time(0);
+    validTill = *localtime(&systemDay);
+    date = ctime(&systemDay);
 
     cout<<"\n\tName /- ";
     getline(cin, name);
@@ -56,20 +58,36 @@ bool members::registerUser(){
 }
 
 
-
+//✅ check validity for user !
 bool members::isValidMember(int id){
     auto locator = allMembers.find(id);
 
+    //✅ check if user exist in the list or not.
     if(locator == allMembers.end()){
         cout<<"user Not Fount !\n";
         return false;
     }
-    pair<string, tm> nameNValidity = locator->second;
-    cout<<nameNValidity.first<<"\n";
-    cout<<nameNValidity.second.tm_mday <<" / "
-        <<nameNValidity.second.tm_mon <<" / " 
-        <<nameNValidity.second.tm_year <<"\n";
 
+    // get todays date;
+    systemDay = time(0);
+    validTill = *localtime(&systemDay);
+    date = ctime(&systemDay);
+
+    pair<string, tm> nameNValidity = locator->second;
+    //if user is having valid subscription
+
+    if(nameNValidity.second.tm_mday > validTill.tm_mday && nameNValidity.second.tm_mon >= validTill.tm_mday){
+        cout<<"subscription has been expired !";
+        return false;
+    }
+    else{
+        cout<<nameNValidity.first<<"\n";
+        cout<<nameNValidity.second.tm_mday <<" / "
+            <<nameNValidity.second.tm_mon <<" / " 
+            <<nameNValidity.second.tm_year <<"\n";
+
+    }
+     
     return true;
 }
 
