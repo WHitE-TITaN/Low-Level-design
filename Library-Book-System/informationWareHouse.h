@@ -9,7 +9,7 @@ public:
     ~informationWareHouse();
 
     bool addBook();
-    bool issueBook(string bookname, string userName); // to develop
+    bool issueBook(string bookname, int id); // to develop
 };
 
 informationWareHouse::informationWareHouse()
@@ -32,6 +32,10 @@ bool informationWareHouse::addBook(){
 
     allBooks[bookName] = obj;
     return true;
+}
+
+bool informationWareHouse::issueBook(string bookName, int id){
+    
 }
 
 informationWareHouse::~informationWareHouse()

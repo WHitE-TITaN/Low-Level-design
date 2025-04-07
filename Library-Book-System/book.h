@@ -15,7 +15,7 @@ class book
 private:
     string bookName;
     int total_count, current_count;
-    unordered_map<string, pair<tm, tm>> issures;
+    unordered_map<int, pair<tm, tm>> issures;
 
     time_t systemDate;      //featch the system time
     tm date;               //formatize to featch date, mounth, year, min, hrs, sec 24 hr clock;

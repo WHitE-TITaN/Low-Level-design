@@ -30,7 +30,7 @@ bool members::registerUser(){
     string name;
     string rawInput;
     //cin.ignore();
-
+  
     // get todays date;
     systemDay = time(0);
     validTill = *localtime(&systemDay);
