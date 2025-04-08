@@ -7,6 +7,7 @@
 #include <ctime>
 #include "members.h"
 #include <string>
+#include <bitset>
 
 using namespace std;
 
@@ -62,7 +63,29 @@ book::~book()
 
 
 int book::dateCalculator(tm date){
-    if(date.tm_year % 4 == 0 && date.tm_year % 100 != 0 || date.tm_year % 400 == 0){
+    bitset<32> byte(date.tm_mon);
+
+    if(date.tm_mday + 15 <= 28){
+        return 0;
     }
+
+    if(date.tm_year % 4 == 0 && date.tm_year % 100 != 0 || date.tm_year % 400 == 0){
+        if(date.tm_mon == 1 && (date.tm_mday + 15) > 29){
+            return 29-date.tm_mday; 
+        }
+    }
+    else{
+        if(date.tm_mon == 1 && (date.tm_mday + 15) > 28){
+            return 28-date.tm_mday; 
+        }
+
+        if(date.tm_mon < 7 && byte[0] != 1){
+            return 31 - date.tm_mday;
+        }
+        else{
+            return 30 - date.tm_mday;
+        }
+    }
+
     return 0;
 }
