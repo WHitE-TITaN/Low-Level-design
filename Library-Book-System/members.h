@@ -47,7 +47,7 @@ bool members::registerUser(){
     }
     
     validTill.tm_year = 1900 + validTill.tm_year;
-    validTill.tm_mon = (validTill.tm_mon + 2) % 12;        // 1 to index it to 1 - january + 1 subscription
+    validTill.tm_mon = (validTill.tm_mon + 1) % 12;        // 1 to index it to 1 - january + 1 subscription
 
     int hashValue = hash<string>{}(rawInput) % 1000000;
     cout<<"\nId - / "<<hashValue<<" / \n";
@@ -85,7 +85,7 @@ bool members::isValidMember(int id){
     else{
         cout<<"Name - "<<nameNValidity.first<<"\nValid till - ";
         cout<<nameNValidity.second.tm_mday <<" / "
-            <<nameNValidity.second.tm_mon <<" / " 
+            <<nameNValidity.second.tm_mon  + 1<<" / " 
             <<nameNValidity.second.tm_year <<"\n";
 
     }

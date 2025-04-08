@@ -48,13 +48,26 @@ bool book::issuedTo(int id){
     auto locator = issures.find(id);
 
     if(locator == issures.end()){
-        tm expiry = date;
-        expiry.tm_mday = (expiry.tm_mday + 15) % 30;
+        tm issueExpireDate = date;
+        int issuedate = dateCalculator(date);
 
+        if(issuedate != 0){
+            issueExpireDate.tm_mon + 1;
+            issueExpireDate.tm_mday + issuedate;
+        }
+        else{
+            issueExpireDate.tm_mday + 15;
+        }
 
-
-        pair<tm, tm> validTill;
+        issures[id] = {date, issueExpireDate};
+        return true;
     }
+    cout<<"\n* User already have this book *\n";
+    cout<<"* Till - "<<locator->second.second.tm_mday<<" / "
+    <<locator->second.second.tm_mon<<" / "
+    <<1900 + locator->second.second.tm_year;
+
+    return false;
 } 
 
 book::~book()
@@ -68,23 +81,24 @@ int book::dateCalculator(tm date){
     if(date.tm_mday + 15 <= 28){
         return 0;
     }
-
+    
+    //if leap year;
     if(date.tm_year % 4 == 0 && date.tm_year % 100 != 0 || date.tm_year % 400 == 0){
         if(date.tm_mon == 1 && (date.tm_mday + 15) > 29){
             return 29-date.tm_mday; 
         }
     }
-    else{
-        if(date.tm_mon == 1 && (date.tm_mday + 15) > 28){
-            return 28-date.tm_mday; 
-        }
 
-        if(date.tm_mon < 7 && byte[0] != 1){
-            return 31 - date.tm_mday;
-        }
-        else{
-            return 30 - date.tm_mday;
-        }
+    //if not leapYear
+    if(date.tm_mon == 1 && (date.tm_mday + 15) > 28){
+        return 28-date.tm_mday;         
+    }
+
+    if(date.tm_mon < 7 && byte[0] != 1 && (date.tm_mday + 15) > 31){
+        return 31 - date.tm_mday;
+    }
+    if(date.tm_mon >= 7 && byte[0] == 1 && (date.tm_mday + 15) > 30){
+        return 30 - date.tm_mday;
     }
 
     return 0;
