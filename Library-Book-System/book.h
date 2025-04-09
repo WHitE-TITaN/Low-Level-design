@@ -35,6 +35,11 @@ book::book(){
     date = *localtime(&systemDate);
 }
 
+
+
+
+
+//add new book 
 bool book::addNewBook(string name, int count){
     this->bookName = name;
     this->total_count = count;
@@ -45,6 +50,11 @@ bool book::addNewBook(string name, int count){
 
 //📚🧑 issue book...
 bool book::issuedTo(int id){
+    if(current_count <= 1){
+        cout<<"Book not avilable for issue !";
+        return false;
+    }
+
     auto locator = issures.find(id);
 
     if(locator == issures.end()){
@@ -60,6 +70,7 @@ bool book::issuedTo(int id){
         }
 
         issures[id] = {date, issueExpireDate};
+        current_count--;
         return true;
     }
     cout<<"\n* User already have this book *\n";
@@ -75,6 +86,9 @@ book::~book()
 }
 
 
+
+
+//calculate days
 int book::dateCalculator(tm date){
     bitset<32> byte(date.tm_mon);
 

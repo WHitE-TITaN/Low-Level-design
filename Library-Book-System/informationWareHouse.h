@@ -34,8 +34,26 @@ bool informationWareHouse::addBook(){
     return true;
 }
 
+
+
+//issue main driver Function 
 bool informationWareHouse::issueBook(string bookName, int id){
+    auto ptrToBook = allBooks.find(bookName);
     
+    if(ptrToBook == allBooks.end()){
+        return false;
+    }
+
+    //check if user is a member
+    members *validityCheck = new members();
+    if(validityCheck->isValidMember(id)){
+        //if member then issue the book
+        book *requiredBook = ptrToBook->second;
+        requiredBook->issuedTo(id);
+        return true;
+    }
+    cout<<"Not a valid member!";
+    return false;
 }
 
 informationWareHouse::~informationWareHouse()
