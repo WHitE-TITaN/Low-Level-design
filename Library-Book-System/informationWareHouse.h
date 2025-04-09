@@ -1,3 +1,5 @@
+#pragma once
+
 #include "book.h"
 
 class informationWareHouse
