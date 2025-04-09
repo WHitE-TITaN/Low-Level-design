@@ -25,7 +25,7 @@ bool informationWareHouse::addBook(){
     cout<<"number of books avilable /- ";
     cin>>totalCount;
 
-    book *obj;
+    book *obj = new book();
     obj->addNewBook(bookName, totalCount);
 
     allBooks[bookName] = obj;
