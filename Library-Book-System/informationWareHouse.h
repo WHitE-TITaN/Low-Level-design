@@ -1,5 +1,3 @@
-#pragma once
-
 #include "book.h"
 
 class informationWareHouse
@@ -45,17 +43,10 @@ bool informationWareHouse::issueBook(string bookName, int id){
     if(ptrToBook == allBooks.end()){
         return false;
     }
-
-    //check if user is a member
-    members *validityCheck = new members();
-    if(validityCheck->isValidMember(id)){
-        //if member then issue the book
-        book *requiredBook = ptrToBook->second;
-        requiredBook->issuedTo(id);
-        return true;
-    }
+    book *requiredBook = ptrToBook->second;
+    requiredBook->issuedTo(id);
     cout<<"Not a valid member!";
-    return false;
+    return true;
 }
 
 informationWareHouse::~informationWareHouse()
