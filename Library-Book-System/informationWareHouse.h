@@ -18,14 +18,12 @@ informationWareHouse::informationWareHouse()
 
 bool informationWareHouse::addBook(){
     string bookName;
-    cin.ignore();
     cout<<"Name of the new Book /- ";
     getline(cin, bookName);
 
     int totalCount;
     cout<<"number of books avilable /- ";
     cin>>totalCount;
-    cin.ignore();
 
     book *obj;
     obj->addNewBook(bookName, totalCount);

@@ -88,7 +88,7 @@ book::~book()
 
 
 
-//calculate days
+//calculate date
 int book::dateCalculator(tm date){
     bitset<32> byte(date.tm_mon);
 

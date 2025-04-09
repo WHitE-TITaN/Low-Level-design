@@ -19,45 +19,45 @@ int main(){
     allCommands();
     while(SystemOnline){
         string Operation;
-        cout<<"library System $ - ";
+        cout<<"\n\nlibrary System $ - ";
 
-        cin.ignore();
         getline(cin, Operation);
 
-        if(Operation == "/exit"){
+        if(Operation == "exit"){
             cout<<" -- Have a nice day -- ";
             SystemOnline = false;
 
             return 0;
         }
 
-        else if(Operation == "/au"){
+        else if(Operation == "au"){
             members *newUser = new members();
             newUser->registerUser();
         }
 
-        else if(Operation == "/ab"){
+        else if(Operation == "ab"){
             informationWareHouse *newBook = new informationWareHouse();
             newBook->addBook();
         }
 
-        else if(Operation == "/ib"){
+        else if(Operation == "ib"){
             int id;
-            string bookName;
+            string bookName; 
             cout<<"\n Enter id - ";
             cin>>id;
+            cin.ignore();
 
             members *validityCheck = new members();
             if(validityCheck->isValidMember(id)){
                 cout<<"\n Enter Book name - ";
-                cin.ignore();
+                
                 getline(cin, bookName);
 
                 informationWareHouse *issueBook = new informationWareHouse();
                 issueBook->issueBook(bookName, id);
             }
         }
-        else if(Operation == "/help"){
+        else if(Operation == "help"){
             allCommands();
         }
         else{

@@ -25,6 +25,7 @@ members::members()
 }
 
 
+
 //🆕 add new user function ->>
 bool members::registerUser(){
     string name;
@@ -39,22 +40,17 @@ bool members::registerUser(){
     cout<<"\n\tName /- ";
     getline(cin, name);
 
-    for(auto character : name){
-        rawInput.push_back(character);
-    }
-    for(auto character : date){
-        rawInput.push_back(character);
-    }
+    rawInput = name + date;
     
-    validTill.tm_year = 1900 + validTill.tm_year;
-    validTill.tm_mon = (validTill.tm_mon + 1) % 12;        // 1 to index it to 1 - january + 1 subscription
+    validTill.tm_mon += 1;
+    mktime(&validTill);
 
     int hashValue = hash<string>{}(rawInput) % 1000000;
-    cout<<"\nId - / "<<hashValue<<" / \n";
-    allMembers[hashValue].first = name;
-    allMembers[hashValue].second = validTill;
+    cout<<"\nlibrary System $\n     /-Id - "<<hashValue<<" \n";
 
-    isValidMember(hashValue);
+    allMembers[hashValue] = {rawInput, validTill};
+
+    return isValidMember(hashValue); 
 }
 
 
