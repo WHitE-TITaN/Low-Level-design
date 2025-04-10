@@ -39,11 +39,11 @@ bool informationWareHouse::issueBook(string bookName, int id){
     auto ptrToBook = allBooks.find(bookName);
     
     if(ptrToBook == allBooks.end()){
+        cout<<"$ Book not avialble";
         return false;
     }
     book *requiredBook = ptrToBook->second;
     requiredBook->issuedTo(id);
-    cout<<"Not a valid member!";
     return true;
 }
 

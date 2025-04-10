@@ -71,6 +71,12 @@ bool book::issuedTo(int id){
 
         issures[id] = {date, issueExpireDate};
         current_count--;
+
+        cout<<"\n Issued till - "<<
+        issueExpireDate.tm_mday<<" / "<<
+        issueExpireDate.tm_mon<<" / "<<
+        issueExpireDate.tm_year;
+        
         return true;
     }
     cout<<"\n* User already have this book *\n";
