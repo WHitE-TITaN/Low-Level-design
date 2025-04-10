@@ -52,7 +52,6 @@ int main(){
                 cout<<"\n Enter Book name - ";
                 
                 getline(cin, bookName);
-
                 informationWareHouse *issueBook = new informationWareHouse();
                 issueBook->issueBook(bookName, id);
             }

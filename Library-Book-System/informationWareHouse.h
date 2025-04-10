@@ -22,8 +22,8 @@ bool informationWareHouse::addBook(){
     getline(cin, bookName);
 
     int totalCount;
-    cout<<"number of books avilable /- ";
-    cin>>totalCount;
+    cout<<"number of books avilable /- "; 
+    cin>>totalCount; cin.ignore();
 
     book *obj = new book();
     obj->addNewBook(bookName, totalCount);

@@ -41,9 +41,9 @@ book::book(){
 
 //add new book 
 bool book::addNewBook(string name, int count){
-    this->bookName = name;
-    this->total_count = count;
-    this->current_count = count;
+    bookName = name;
+    total_count = count;
+    current_count = count;
 }
 
 
