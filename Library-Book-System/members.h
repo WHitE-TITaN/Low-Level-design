@@ -46,7 +46,9 @@ bool members::registerUser(){
     
     validTill.tm_mon += 1;
     mktime(&validTill);
-
+    //✨ mktime adjusts the tm struct so that if days/months go over their 
+    //limit, it carries over to the next month/year automatically.
+    
     int hashValue = hash<string>{}(rawInput) % 1000000;
     cout<<"\nlibrary System $\n     /-Id - "<<hashValue<<" \n";
 
@@ -93,7 +95,7 @@ bool members::isValidMember(int id){
         cout << "Name - " << nameNValidity.first << "\nValid till - ";
         cout << expiry.tm_mday << " / "
              << expiry.tm_mon + 1 << " / "
-             << expiry.tm_year + 1900 << "\n";
+             << expiry.tm_year << "\n";
         return true;
     }
     return false;

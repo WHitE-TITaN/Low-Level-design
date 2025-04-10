@@ -44,6 +44,7 @@ bool book::addNewBook(string name, int count){
     bookName = name;
     total_count = count;
     current_count = count;
+    return true;
 }
 
 
@@ -62,12 +63,16 @@ bool book::issuedTo(int id){
         int issuedate = dateCalculator(date);
 
         if(issuedate != 0){
-            issueExpireDate.tm_mon + 1;
-            issueExpireDate.tm_mday + issuedate;
+            issueExpireDate.tm_mon += 1;
+            issueExpireDate.tm_mday += issuedate;
         }
         else{
-            issueExpireDate.tm_mday + 15;
+            issueExpireDate.tm_mday += 15;
         }
+        mktime(&issueExpireDate);
+        //✨ mktime adjusts the tm struct so that if days/months go over their limit,
+        // it carries over to the next month/year automatically.
+
 
         issures[id] = {date, issueExpireDate};
         current_count--;
