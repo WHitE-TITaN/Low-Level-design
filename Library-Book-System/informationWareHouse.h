@@ -3,7 +3,7 @@
 class informationWareHouse
 {
 private:
-    unordered_map<string, book *> allBooks;
+    static unordered_map<string, book *> allBooks;
 public:
     informationWareHouse();
     ~informationWareHouse();
