@@ -12,6 +12,8 @@ public:
     bool issueBook(string bookname, int id); // to develop
 };
 
+unordered_map<string, book *> informationWareHouse::allBooks; //global static variable!
+
 informationWareHouse::informationWareHouse()
 {
 }

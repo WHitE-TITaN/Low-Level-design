@@ -89,7 +89,7 @@ bool members::isValidMember(int id){
     }
 
     if (expired) {
-        cout << "Subscription has expired!\n";
+        cout <<nameNValidity.first<<"'s - Subscription has expired!\n";
         return false;
     } else {
         cout << "Name - " << nameNValidity.first << "\nValid till - ";

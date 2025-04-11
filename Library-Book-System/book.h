@@ -28,6 +28,7 @@ public:
 
     bool issuedTo(int id);
     bool addNewBook(string name, int total_count);
+    void allIssuers();
 };
 
 book::book(){
@@ -127,4 +128,23 @@ int book::dateCalculator(tm date){
     }
 
     return 0;
+}
+
+void book::allIssuers(){
+    for(auto person : issures){
+
+        cout<<"book - "<<bookName<<"\n"
+        <<"id - "<<person.first<<"\n";
+
+        members *personalDetail;
+        personalDetail->isValidMember(person.first);
+
+        cout<<"From - "<<person.second.first.tm_mday<<" / "
+            <<person.second.first.tm_mon<<" / "
+            <<person.second.first.tm_year<<"\n";
+
+        cout<<"To - "<<person.second.second.tm_mday<<" / "
+            <<person.second.first.tm_mon<<" / "
+            <<person.second.second.tm_year<<"\n";
+    }
 }
