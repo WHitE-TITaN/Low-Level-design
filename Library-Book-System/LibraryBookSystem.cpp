@@ -9,7 +9,8 @@ void allCommands(){
     "2. add book /- /ab\n"<<
     "3. issue Book /- /ib\n"<<
     "4. exit /- /exit\n"<<
-    "5. show all commands /- /help\n";
+    "5. show all person issued the book with name /- /su"<<
+    "6. show all commands /- /help\n";
     return;
 }
 
@@ -55,6 +56,14 @@ int main(){
                 informationWareHouse *issueBook = new informationWareHouse();
                 issueBook->issueBook(bookName, id);
             }
+        }
+        else if(Operation == "su"){
+            cout<<"Enter Book Name - ";
+            string bookName;
+            getline(cin, bookName);
+
+            informationWareHouse *showUsers;
+            showUsers->allIssuers(bookName);
         }
         else if(Operation == "help"){
             allCommands();

@@ -10,6 +10,7 @@ public:
 
     bool addBook();
     bool issueBook(string bookname, int id); // to develop
+    void allIssuers(string bookName);
 };
 
 unordered_map<string, book *> informationWareHouse::allBooks; //global static variable!
@@ -51,4 +52,15 @@ bool informationWareHouse::issueBook(string bookName, int id){
 
 informationWareHouse::~informationWareHouse()
 {
+}
+
+
+void informationWareHouse::allIssuers(string bookName){
+    auto locator = allBooks.find(bookName);
+
+    if(locator == allBooks.end()){
+        cout<<"no book of the name - "<<bookName;
+        return;
+    }
+    locator->second->allIssuers();
 }
