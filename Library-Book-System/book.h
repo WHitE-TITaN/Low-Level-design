@@ -11,6 +11,7 @@
 
 using namespace std;
 
+
 class book
 {
 private:
@@ -131,13 +132,15 @@ int book::dateCalculator(tm date){
 }
 
 void book::allIssuers(){
+    members personalDetail;
+
     for(auto person : issures){
 
         cout<<"book - "<<bookName<<"\n"
         <<"id - "<<person.first<<"\n";
 
-        members *personalDetail;
-        personalDetail->isValidMember(person.first);
+       
+        personalDetail.isValidMember(person.first);
 
         cout<<"From - "<<person.second.first.tm_mday<<" / "
             <<person.second.first.tm_mon<<" / "

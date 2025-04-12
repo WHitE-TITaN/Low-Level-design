@@ -1,7 +1,12 @@
 #pragma once
 
-#include "book.h"
+#include <unordered_map>
+#include <ctime>
+#include <string>
+#include <iostream>
 #include <functional>
+
+using namespace std;
 
 class members{
 private:
