@@ -10,6 +10,12 @@ using namespace std;
 
 class members{
 private:
+    class Memeber{
+        string name, address;
+        pair<tm, tm> subscription;
+        vector<pair<string, tm>> booksIddued;
+        int mobileNo;
+    };
     static unordered_map<int, pair<string, tm>> allMembers;            //id - > {name , valid memebrship date ->>};
     time_t systemDay;
     tm validTill;
@@ -21,6 +27,7 @@ public:
 
     bool registerUser();
     bool isValidMember(int id);
+    bool canIssueBook(int id, tm issueBookTill);
 };
 
 //defining the static variable
@@ -108,4 +115,8 @@ bool members::isValidMember(int id){
 
 members::~members()
 {
+}
+
+bool members::canIssueBook(int id, tm issuedBookTill){
+    auto locator = allMembers.find(id);
 }
