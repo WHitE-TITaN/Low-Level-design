@@ -4,19 +4,22 @@
 #include <ctime>
 #include <string>
 #include <iostream>
+#include <vector>
 #include <functional>
 
 using namespace std;
 
 class members{
 private:
-    class Memeber{
+    class Member{
+        public:
         string name, address;
         pair<tm, tm> subscription;
-        vector<pair<string, tm>> booksIddued;
+        vector<string> booksIssued;
         int mobileNo;
     };
-    static unordered_map<int, pair<string, tm>> allMembers;            //id - > {name , valid memebrship date ->>};
+
+    static unordered_map<int, Member *> allMembers;            //id - > {name , valid memebrship date ->>};
     time_t systemDay;
     tm validTill;
     string date;                                               //only to generate hash
@@ -31,7 +34,7 @@ public:
 };
 
 //defining the static variable
-unordered_map<int, pair<string, tm>> members::allMembers;
+unordered_map<int, members::Member*> members::allMembers;
 
 //constructor ->>
 members::members()
@@ -42,7 +45,8 @@ members::members()
 
 //🆕 add new user function ->>
 bool members::registerUser(){
-    string name;
+    string userName, userAddress;
+    int userMobileNo;
     string rawInput;
     //cin.ignore();
   
@@ -51,20 +55,33 @@ bool members::registerUser(){
     validTill = *localtime(&systemDay);
     date = ctime(&systemDay);
 
-    cout<<"\n\tName /- ";
-    getline(cin, name);
+    cout<<"\n\tName - ";
+    getline(cin, userName);
+    cout<<"\n\tAddress -";
+    getline(cin, userAddress);
+    cout<<"\n\tMobile Number - ";
+    cin>>userMobileNo;
+    cin.ignore();
 
-    rawInput = name + date;
+    rawInput = userName + date;
     
+    int hashValue = hash<string>{}(rawInput) % 1000000;
+    cout<<"\nlibrary System $\n     - Id - "<<hashValue<<" \n";
+
+    Member *newMember = new Member();
+    newMember->name = userName;
+    newMember->address = userAddress;
+    newMember->mobileNo = userMobileNo;
+    newMember->subscription.first = validTill;
+
     validTill.tm_mon += 1;
     mktime(&validTill);
     //✨ mktime adjusts the tm struct so that if days/months go over their 
     //limit, it carries over to the next month/year automatically.
-    
-    int hashValue = hash<string>{}(rawInput) % 1000000;
-    cout<<"\nlibrary System $\n     /-Id - "<<hashValue<<" \n";
 
-    allMembers[hashValue] = {name , validTill};
+    newMember->subscription.second = validTill;
+
+    allMembers[hashValue] = newMember;
 
     return isValidMember(hashValue); 
 }
@@ -85,32 +102,37 @@ bool members::isValidMember(int id){
     // get todays date;
     systemDay = time(0);
     tm *current = localtime(&systemDay);
+    bool expire = false;
 
-    pair<string, tm> nameNValidity = locator->second;
-    //if user is having valid subscription
-
-    tm &expiry = nameNValidity.second;
-    bool expired = false;
-
-    if (current->tm_year > expiry.tm_year) {
-        expired = true;
-    } else if (current->tm_year == expiry.tm_year && current->tm_mon > expiry.tm_mon) {
-        expired = true;
-    } else if (current->tm_year == expiry.tm_year && current->tm_mon == expiry.tm_mon && current->tm_mday > expiry.tm_mday) {
-        expired = true;
+    pair<tm, tm> validity = locator->second->subscription;
+    if(validity.second.tm_year < current->tm_year){
+        expire = true;
+    }  
+    if(validity.second.tm_mon < current->tm_mon){
+        expire = true;
+    }
+    if(validity.second.tm_mday < current->tm_mday){
+        expire = true;
     }
 
-    if (expired) {
-        cout <<nameNValidity.first<<"'s - Subscription has expired!\n";
+    if(expire == true){
+        cout<<"validity has be expire - ";
+        if(locator->second->booksIssued.size() != 0){
+            cout<<"\nplease return the under written book - \n";
+            
+            for(auto name : locator->second->booksIssued){
+                cout<<"\n"<<name;
+            }
+        }
         return false;
-    } else {
-        cout << "Name - " << nameNValidity.first << "\nValid till - ";
-        cout << expiry.tm_mday << " / "
-             << expiry.tm_mon + 1 << " / "
-             << expiry.tm_year << "\n";
-        return true;
     }
-    return false;
+
+    cout<<"\n name -"<<locator->second->name;
+    cout<<"\n valid till -"<<validity.second.tm_mday<<" / "
+        <<validity.second.tm_mon<<" / "<<
+        validity.second.tm_year;
+
+    return true;
 }
 
 members::~members()
