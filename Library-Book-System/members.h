@@ -10,13 +10,15 @@ using namespace std;
 
 class members{
 private:
-    class Memeber{
+    class Member{
+        public:
         string name, address;
         pair<tm, tm> subscription;
         vector<pair<string, tm>> booksIddued;
         int mobileNo;
     };
-    static unordered_map<int, pair<string, tm>> allMembers;            //id - > {name , valid memebrship date ->>};
+
+    static unordered_map<int, Member *> allMembers;            //id - > {name , valid memebrship date ->>};
     time_t systemDay;
     tm validTill;
     string date;                                               //only to generate hash
@@ -31,7 +33,7 @@ public:
 };
 
 //defining the static variable
-unordered_map<int, pair<string, tm>> members::allMembers;
+unordered_map<int, members::Member*> members::allMembers;
 
 //constructor ->>
 members::members()
@@ -42,7 +44,8 @@ members::members()
 
 //🆕 add new user function ->>
 bool members::registerUser(){
-    string name;
+    string userName, userAddress;
+    int userMobileNo;
     string rawInput;
     //cin.ignore();
   
@@ -51,20 +54,33 @@ bool members::registerUser(){
     validTill = *localtime(&systemDay);
     date = ctime(&systemDay);
 
-    cout<<"\n\tName /- ";
-    getline(cin, name);
+    cout<<"\n\tName - ";
+    getline(cin, userName);
+    cout<<"\n\tAddress -";
+    getline(cin, userAddress);
+    cout<<"\n\tMobile Number - ";
+    cin>>userMobileNo;
+    cin.ignore();
 
-    rawInput = name + date;
-    
-    validTill.tm_mon += 1;
-    mktime(&validTill);
-    //✨ mktime adjusts the tm struct so that if days/months go over their 
-    //limit, it carries over to the next month/year automatically.
+    rawInput = userName + date;
     
     int hashValue = hash<string>{}(rawInput) % 1000000;
     cout<<"\nlibrary System $\n     /-Id - "<<hashValue<<" \n";
 
-    allMembers[hashValue] = {name , validTill};
+    Member *newMember = new Member();
+    newMember->name = userName;
+    newMember->address = userAddress;
+    newMember->mobileNo = userMobileNo;
+    newMember->subscription.first = validTill;
+
+    validTill.tm_mon += 1;
+    mktime(&validTill);
+    //✨ mktime adjusts the tm struct so that if days/months go over their 
+    //limit, it carries over to the next month/year automatically.
+
+    newMember->subscription.second = validTill;
+
+    allMembers[hashValue] = newMember;
 
     return isValidMember(hashValue); 
 }
