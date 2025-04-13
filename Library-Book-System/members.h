@@ -14,7 +14,7 @@ private:
         public:
         string name, address;
         pair<tm, tm> subscription;
-        vector<pair<string, tm>> booksIddued;
+        vector<string> booksIssued;
         int mobileNo;
     };
 
@@ -101,32 +101,32 @@ bool members::isValidMember(int id){
     // get todays date;
     systemDay = time(0);
     tm *current = localtime(&systemDay);
+    bool expire = false;
 
-    pair<string, tm> nameNValidity = locator->second;
-    //if user is having valid subscription
-
-    tm &expiry = nameNValidity.second;
-    bool expired = false;
-
-    if (current->tm_year > expiry.tm_year) {
-        expired = true;
-    } else if (current->tm_year == expiry.tm_year && current->tm_mon > expiry.tm_mon) {
-        expired = true;
-    } else if (current->tm_year == expiry.tm_year && current->tm_mon == expiry.tm_mon && current->tm_mday > expiry.tm_mday) {
-        expired = true;
+    pair<tm, tm> validity = locator->second->subscription;
+    if(validity.second.tm_year < current->tm_year){
+        expire = true;
+    }  
+    if(validity.second.tm_mon < current->tm_mon){
+        expire = true;
+    }
+    if(validity.second.tm_mday < current->tm_mday){
+        expire = true;
     }
 
-    if (expired) {
-        cout <<nameNValidity.first<<"'s - Subscription has expired!\n";
+    if(expire == true){
+        cout<<"validity has be expire - ";
+        if(locator->second->booksIssued.size() != 0){
+            cout<<"\nplease return the under written book - \n";
+            
+            for(auto name : locator->second->booksIssued){
+                cout<<"\n"<<name;
+            }
+        }
         return false;
-    } else {
-        cout << "Name - " << nameNValidity.first << "\nValid till - ";
-        cout << expiry.tm_mday << " / "
-             << expiry.tm_mon + 1 << " / "
-             << expiry.tm_year << "\n";
-        return true;
     }
-    return false;
+
+    return true;
 }
 
 members::~members()
