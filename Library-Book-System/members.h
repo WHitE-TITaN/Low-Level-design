@@ -4,6 +4,7 @@
 #include <ctime>
 #include <string>
 #include <iostream>
+#include <vector>
 #include <functional>
 
 using namespace std;
@@ -65,7 +66,7 @@ bool members::registerUser(){
     rawInput = userName + date;
     
     int hashValue = hash<string>{}(rawInput) % 1000000;
-    cout<<"\nlibrary System $\n     /-Id - "<<hashValue<<" \n";
+    cout<<"\nlibrary System $\n     - Id - "<<hashValue<<" \n";
 
     Member *newMember = new Member();
     newMember->name = userName;
@@ -125,6 +126,11 @@ bool members::isValidMember(int id){
         }
         return false;
     }
+
+    cout<<"\n name -"<<locator->second->name;
+    cout<<"\n valid till -"<<validity.second.tm_mday<<" / "
+        <<validity.second.tm_mon<<" / "<<
+        validity.second.tm_year;
 
     return true;
 }
