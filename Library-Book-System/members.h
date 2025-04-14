@@ -1,6 +1,7 @@
 #pragma once
 
 #include <unordered_map>
+#include <unordered_set>
 #include <ctime>
 #include <string>
 #include <iostream>
@@ -15,22 +16,20 @@ private:
         public:
         string name, address;
         pair<tm, tm> subscription;
-        vector<string> booksIssued;
+        unordered_set<string> booksIssued;
         int mobileNo;
     };
 
     static unordered_map<int, Member *> allMembers;            //id - > {name , valid memebrship date ->>};
-    time_t systemDay;
-    tm validTill;
-    string date;                                               //only to generate hash
 
 public:
     members();
     ~members();
 
+    void issuedBookOnUser(int id);
     bool registerUser();
     bool isValidMember(int id);
-    bool canIssueBook(int id, tm issueBookTill);
+    bool canIssueBook(int id, string bookName);
 };
 
 //defining the static variable
@@ -51,9 +50,9 @@ bool members::registerUser(){
     //cin.ignore();
   
     // get todays date;
-    systemDay = time(0);
-    validTill = *localtime(&systemDay);
-    date = ctime(&systemDay);
+    time_t systemDay = time(0);
+    tm validTill = *localtime(&systemDay);
+    string date = ctime(&systemDay);
 
     cout<<"\n\tName - ";
     getline(cin, userName);
@@ -100,7 +99,7 @@ bool members::isValidMember(int id){
     }
 
     // get todays date;
-    systemDay = time(0);
+    time_t systemDay = time(0);
     tm *current = localtime(&systemDay);
     bool expire = false;
 
@@ -139,6 +138,43 @@ members::~members()
 {
 }
 
-bool members::canIssueBook(int id, tm issuedBookTill){
+bool members::canIssueBook(int id, string bookName){
     auto locator = allMembers.find(id);
+
+    if(locator == allMembers.end()){
+        cout<<"User Not found";
+        return false;
+    }
+
+    if(locator->second->booksIssued.find(bookName) != locator->second->booksIssued.end()){
+        cout<<locator->second->name<<" already have the same book -";
+        return false;
+    }
+
+    time_t currentdate = time(0);
+    tm *today = localtime(&currentdate);
+
+    return true;
+}
+
+
+void members::issuedBookOnUser(int id){
+    auto locator = allMembers.find(id);
+    if(locator == allMembers.end()){
+        cout<<"User Not Found !";
+        return;
+    }
+
+    Member *person = locator->second;
+
+    if(person->booksIssued.size() == 0){
+        cout<<"person have not issued any books -";
+        return;
+    }
+
+    cout<<"\n\tall the issued books by - "<<person->name<<"\n\tare under - ";
+    for(auto books : person->booksIssued){
+        cout<<books<<"\n";
+    }
+    return;
 }
