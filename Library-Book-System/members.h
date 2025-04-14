@@ -28,6 +28,7 @@ public:
     members();
     ~members();
 
+    void issuedBookOnUser(int id);
     bool registerUser();
     bool isValidMember(int id);
     bool canIssueBook(int id, tm issueBookTill);
@@ -141,4 +142,27 @@ members::~members()
 
 bool members::canIssueBook(int id, tm issuedBookTill){
     auto locator = allMembers.find(id);
+    
+}
+
+
+void members::issuedBookOnUser(int id){
+    auto locator = allMembers.find(id);
+    if(locator == allMembers.end()){
+        cout<<"User Not Found !";
+        return;
+    }
+
+    Member *person = locator->second;
+
+    if(person->booksIssued.size() == 0){
+        cout<<"person have not issued any books -";
+        return;
+    }
+
+    cout<<"\n\tall the issued books by - "<<person->name<<"\n\tare under - ";
+    for(auto books : person->booksIssued){
+        cout<<books<<"\n";
+    }
+    return;
 }
