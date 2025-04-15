@@ -26,6 +26,7 @@ public:
     members();
     ~members();
 
+    void haveIssued(int id, string bookName);
     void issuedBookOnUser(int id);
     bool registerUser();
     bool isValidMember(int id);
@@ -104,6 +105,7 @@ bool members::isValidMember(int id){
     bool expire = false;
 
     pair<tm, tm> validity = locator->second->subscription;
+    
     if(validity.second.tm_year < current->tm_year){
         expire = true;
     }  
@@ -148,7 +150,7 @@ bool members::canIssueBook(int id, string bookName){
     }
 
     if(locator->second->booksIssued.find(bookName) != locator->second->booksIssued.end()){
-        cout<<locator->second->name<<" already have the same book -";
+        cout<<locator->second->name<<"\nalready have the same book -";
         return false;
     }
 
@@ -179,8 +181,7 @@ bool members::canIssueBook(int id, string bookName){
 
 void members::issuedBookOnUser(int id){
     auto locator = allMembers.find(id);
-    if(locator == allMembers.end()){
-        cout<<"User Not Found !";
+    if(!isValidMember(id)){
         return;
     }
 
@@ -196,4 +197,10 @@ void members::issuedBookOnUser(int id){
         cout<<books<<"\n";
     }
     return;
+}
+
+
+void members::haveIssued(int id, string bookName){
+    auto locator = allMembers.find(id);
+    locator->second->booksIssued.insert(bookName);
 }

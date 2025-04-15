@@ -19,9 +19,6 @@ private:
     int total_count, current_count;
     unordered_map<int, pair<tm, tm>> issures;
 
-    time_t systemDate;      //featch the system time
-    tm date;               //formatize to featch date, mounth, year, min, hrs, sec 24 hr clock;
-
     int dateCalculator(tm date);
 public:
     book();
@@ -33,8 +30,6 @@ public:
 };
 
 book::book(){
-    systemDate = time(0);
-    date = *localtime(&systemDate);
 }
 
 
@@ -58,7 +53,11 @@ bool book::issuedTo(int id){
         return false;
     }
 
+    time_t systemDate = time(0);;     
+    tm date = *localtime(&systemDate);
+
     auto locator = issures.find(id);
+    members *issueBook;
 
     if(locator == issures.end()){
         tm issueExpireDate = date;
