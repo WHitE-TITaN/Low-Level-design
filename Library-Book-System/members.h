@@ -110,7 +110,8 @@ bool members::isValidMember(int id){
     if(validity.second.tm_mon < current->tm_mon){
         expire = true;
     }
-    if(validity.second.tm_mday < current->tm_mday){
+    if(validity.second.tm_mday < current->tm_mday && 
+        validity.second.tm_mon <= current->tm_mon){
         expire = true;
     }
 
@@ -153,6 +154,24 @@ bool members::canIssueBook(int id, string bookName){
 
     time_t currentdate = time(0);
     tm *today = localtime(&currentdate);
+    today->tm_mday += 15;
+    mktime(today);
+
+    if(locator->second->subscription.second.tm_mday < today->tm_year){
+        cout<<"Expiring Subscription Cant Issue Book -";
+        return false;
+    }
+    if(locator->second->subscription.second.tm_mon < 
+    today->tm_mon){
+        cout<<"Expiring Subscription Cant Issue Book -";
+        return false;
+    }
+    if(locator->second->subscription.second.tm_mday < 
+        today->tm_mday && locator->second->subscription.second.tm_mday < 
+        today->tm_mday){
+            cout<<"Expiring Subscription Cant Issue Book -";
+            return false;
+    }
 
     return true;
 }
