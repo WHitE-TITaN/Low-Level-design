@@ -46,7 +46,7 @@ members::members()
 //🆕 add new user function ->>
 bool members::registerUser(){
     string userName, userAddress;
-    int userMobileNo;
+    long long userMobileNo;
     string rawInput;
     //cin.ignore();
   
@@ -159,7 +159,7 @@ bool members::canIssueBook(int id, string bookName){
     today->tm_mday += 15;
     mktime(today);
 
-    if(locator->second->subscription.second.tm_mday < today->tm_year){
+    if(locator->second->subscription.second.tm_year < today->tm_year){
         cout<<"Expiring Subscription Cant Issue Book -";
         return false;
     }
@@ -168,8 +168,8 @@ bool members::canIssueBook(int id, string bookName){
         cout<<"Expiring Subscription Cant Issue Book -";
         return false;
     }
-    if(locator->second->subscription.second.tm_mday < 
-        today->tm_mday && locator->second->subscription.second.tm_mday < 
+    if(locator->second->subscription.second.tm_mon < 
+        today->tm_mon && locator->second->subscription.second.tm_mday < 
         today->tm_mday){
             cout<<"Expiring Subscription Cant Issue Book -";
             return false;

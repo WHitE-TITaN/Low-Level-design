@@ -53,7 +53,9 @@ bool informationWareHouse::issueBook(string bookName, int id){
     }
 
     book *requiredBook = ptrToBook->second;
-    requiredBook->issuedTo(id);
+    if(!requiredBook->issuedTo(id)){
+        return false;
+    }
     issueBook->haveIssued(id, bookName);
 
     delete issueBook, requiredBook;
