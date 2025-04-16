@@ -46,8 +46,19 @@ bool informationWareHouse::issueBook(string bookName, int id){
         cout<<"$ Book not avialble";
         return false;
     }
+
+    members *issueBook;
+    if(!issueBook->canIssueBook(id, bookName)){
+        return false;
+    }
+
     book *requiredBook = ptrToBook->second;
-    requiredBook->issuedTo(id);
+    if(!requiredBook->issuedTo(id)){
+        return false;
+    }
+    issueBook->haveIssued(id, bookName);
+
+    delete issueBook, requiredBook;
     return true;
 }
 
