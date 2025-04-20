@@ -1,7 +1,7 @@
 #include<members.h>
 
 class readingHall{
-    unordered_set<int> membersIn;
+    static unordered_set<int> membersIn;
     public:
     bool checkIN(int id){
         members *checkingIN;
@@ -24,3 +24,5 @@ class readingHall{
         return true;
     }
 };
+
+unordered_set<int> readingHall::membersIn;

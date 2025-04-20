@@ -10,8 +10,8 @@ void allCommands(){
     "3. issue Book /- /ib\n"<<
     "4. exit /- /exit\n"<<
     "5. show all person issued the book with name /- /su\n"<<
-    "6. Show all books user have issued /- /bu\n"<<
-    "7. show all commands /- /help\n";
+    "6. Show all books user have issued /- /bu\n7. reading Hall/- rh\n"<<
+    "8. show all commands /- /help\n";
     return;
 }
 
@@ -74,6 +74,12 @@ int main(){
 
             members *listBook;
             listBook->issuedBookOnUser(userId);
+        }
+        else if(Operation == "rh"){
+            int id;
+            cout<<"Enter id - ";
+            cin>>id;
+            
         }
         else if(Operation == "help"){
             allCommands();
