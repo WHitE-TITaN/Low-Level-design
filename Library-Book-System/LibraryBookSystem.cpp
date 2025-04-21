@@ -1,5 +1,6 @@
 #include "members.h"
 #include "informationWareHouse.h"
+#include "inLibrary.h"
 
 
 using namespace std;
@@ -34,8 +35,8 @@ int main(){
         }
 
         else if(Operation == "au"){
-            members *newUser = new members();
-            newUser->registerUser();
+            members newUser;
+            newUser.registerUser();
         }
 
         else if(Operation == "ab"){
@@ -76,24 +77,24 @@ int main(){
             members *listBook;
             listBook->issuedBookOnUser(userId);
         }
-        // else if(Operation == "rh"){
-        //     int id;
-        //     cout<<"Enter id - ";
-        //     cin>>id;
+        else if(Operation == "ci"){
+            int id;
+            cout<<"Enter id - ";
+            cin>>id;
 
-        //     readingHall *checkin;
-        //     checkin->checkIN(id);
-        //     delete(checkin);
-        // }
-        // else if(Operation == "co"){
-        //     int id;
-        //     cout<<"Enter id - ";
-        //     cin>>id;
+            readingHall *checkin;
+            checkin->checkIN(id);
+            delete(checkin);
+        }
+        else if(Operation == "co"){
+            int id;
+            cout<<"Enter id - ";
+            cin>>id;
 
-        //     readingHall *checkin;
-        //     checkin->checkOut(id);
-        //     delete(checkin);
-        // }
+            readingHall *checkin;
+            checkin->checkOut(id);
+            delete(checkin);
+        }
         else if(Operation == "help"){
             allCommands();
         }
