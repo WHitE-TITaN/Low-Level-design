@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <ctime>
+#include <limits>
 #include <string>
 #include <iostream>
 #include <vector>
@@ -48,7 +49,9 @@ bool members::registerUser(){
     string userName, userAddress;
     long long userMobileNo;
     string rawInput;
-    //cin.ignore();
+    
+    //cleaning input buffer.
+    //cin.ignore(numeric_limits<streamsize>::max(), '\n');
   
     // get todays date;
     time_t systemDay = time(0);
