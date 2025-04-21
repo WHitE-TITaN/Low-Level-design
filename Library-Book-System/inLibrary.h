@@ -4,12 +4,12 @@
 class readingHall{
     static unordered_set<int> membersIn;
     public:
-    bool checkIN(int id){
-        members *checkingIN;
-        if(!checkingIN->isValidMember(id)){
+    bool checkIN(const int& id){
+        members checkingIN;
+        if(!checkingIN.isValidMember(id)){
             return false;
         }
-        cout<<"\n*Welocme Sir*";
+        cout<<"\n*Welocome Sir*";
         membersIn.insert(id);
         return true;
     }

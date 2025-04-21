@@ -35,9 +35,8 @@ int main(){
         }
 
         else if(Operation == "au"){
-            members *newUser = new members();
-            newUser->registerUser();
-            delete newUser;
+            members newUser;
+            newUser.registerUser();
         }
 
         else if(Operation == "ab"){
@@ -78,7 +77,7 @@ int main(){
             members *listBook;
             listBook->issuedBookOnUser(userId);
         }
-        else if(Operation == "rh"){
+        else if(Operation == "ci"){
             int id;
             cout<<"Enter id - ";
             cin>>id;
