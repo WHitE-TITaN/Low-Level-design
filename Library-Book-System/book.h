@@ -19,6 +19,8 @@ private:
     unordered_map<int, pair<tm, tm>> issures;
 
     int dateCalculator(tm date);
+    int calculateFine(tm expiryDate, tm currentDate);
+    
 public:
     book();
     ~book();
@@ -26,6 +28,7 @@ public:
     bool issuedTo(int id);
     bool addNewBook(string name, int total_count);
     void allIssuers();
+    int returnBook(int id);
 };
 
 book::book(){
@@ -148,4 +151,47 @@ void book::allIssuers(){
             <<person.second.first.tm_mon<<" / "
             <<person.second.second.tm_year<<"\n";
     }
+}
+
+int book::returnBook(int id) {
+    auto it = issures.find(id);
+    if (it == issures.end()) {
+        cout << "No such issuer found!\n";
+        return -1; // or some error code
+    }
+
+    tm expiryDate = it->second.second;
+
+    time_t systemDate = time(0);
+    tm currentDate = *localtime(&systemDate);
+
+    int fine = calculateFine(expiryDate, currentDate);
+
+    issures.erase(it); // Remove the user from issuers
+    current_count++;   // Increase available count back
+
+    if (fine > 0) {
+        cout << "Book returned late! Fine: ₹" << fine << "\n";
+    } else {
+        cout << "Book returned successfully. No fine.\n";
+    }
+
+    
+    return fine;
+}
+
+
+int calculateFine(tm expiryDate, tm currentDate) {
+    time_t expiry = mktime(&expiryDate);
+    time_t current = mktime(&currentDate);
+
+    double secondsDiff = difftime(current, expiry);
+    int daysLate = static_cast<int>(secondsDiff / (60 * 60 * 24)); // convert seconds to days
+
+    if (daysLate <= 0) {
+        return 0; // No fine if returned on or before due date
+    }
+
+    int finePerDay = 10; // 💸 Example: ₹10 fine per day late
+    return daysLate * finePerDay;
 }
