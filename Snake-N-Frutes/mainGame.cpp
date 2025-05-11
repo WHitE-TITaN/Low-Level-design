@@ -1,6 +1,6 @@
-#include <iostream>
+#include "header/board.h"
 
 int main(){
-    std::cout<<"Hello World";
-    return 0;
+    board newGame;
+    newGame.printBoard();
 }
